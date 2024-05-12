@@ -8,7 +8,7 @@ let handlePushTelegramNotification = async (req, res) => {
   //send notification to telegram
   let user = {
     fullName: req.body.fullName,
-    email: req.body.email,
+    // email: req.body.email,
     description: req.body.description,
   };
   await telegramService.sendNotification(user);
