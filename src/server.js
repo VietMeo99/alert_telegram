@@ -3,6 +3,7 @@ import express from "express";
 import configViewEngine from "./config/viewEngine";
 import initWebRoutes from "./routes/web";
 import bodyParser from "body-parser";
+import cronJob from "./cron/cronTask.js";
 
 // "repository": {
 //    "type": "git",
@@ -20,6 +21,8 @@ configViewEngine(app);
 
 //init all web routes
 initWebRoutes(app);
+
+cronJob.job.start();
 
 let port = process.env.PORT || 8080;
 

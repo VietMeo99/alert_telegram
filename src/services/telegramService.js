@@ -1,4 +1,5 @@
-import request from "request";
+// import request from "request";
+import axios from "axios";
 
 require("dotenv").config();
 
@@ -17,21 +18,32 @@ Description: <i>${user.description}</i>
 `,
       };
 
-      request(
-        {
-          uri: `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
-          method: "POST",
-          json: data,
-        },
-        function (err, res, body) {
-          if (!err) {
-            resolve("done!");
-          } else {
-            console.log(err);
-            reject(err);
-          }
-        }
-      );
+      // request(
+      //   {
+      //     uri: `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+      //     method: "POST",
+      //     json: data,
+      //   },
+      //   function (err, res, body) {
+      //     if (!err) {
+      //       resolve("done!");
+      //     } else {
+      //       console.log(err);
+      //       reject(err);
+      //     }
+      //   }
+      // );
+      axios
+        .get(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          params: data,
+        })
+        .then(() => {
+          resolve("done!");
+        })
+        .catch(() => {
+          console.log(err);
+          reject(err);
+        });
     } catch (e) {
       reject(e);
     }
@@ -51,21 +63,33 @@ let sendMeAGif = () => {
         caption: "<b>Check out</b> my <i>new gif</i>",
       };
 
-      request(
-        {
-          uri: `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendAnimation`,
-          method: "POST",
-          json: data,
-        },
-        function (err, res, body) {
-          if (!err) {
-            resolve("done!");
-          } else {
-            console.log(err);
-            reject(err);
-          }
-        }
-      );
+      // request(
+      //   {
+      //     uri: `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendAnimation`,
+      //     method: "POST",
+      //     json: data,
+      //   },
+      //   function (err, res, body) {
+      //     if (!err) {
+      //       resolve("done!");
+      //     } else {
+      //       console.log(err);
+      //       reject(err);
+      //     }
+      //   }
+      // );
+      axios
+        .post(
+          `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendAnimation`,
+          data
+        )
+        .then(() => {
+          resolve("done!");
+        })
+        .catch(() => {
+          console.log(err);
+          reject(err);
+        });
     } catch (e) {
       reject(e);
     }
